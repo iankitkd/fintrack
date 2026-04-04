@@ -1,4 +1,5 @@
 import { authenticate } from "#/modules/auth/auth.middleware.js";
+import { authorize } from "#/modules/auth/role.middleware.js";
 import {
   createUserHandler,
   getUsersHandler,
@@ -7,7 +8,7 @@ import { Router } from "express";
 
 const router = Router();
 
-router.post("/", authenticate, createUserHandler);
-router.get("/", authenticate, getUsersHandler);
+router.post("/", authenticate, authorize("ADMIN"), createUserHandler);
+router.get("/", authenticate, authorize("ADMIN"), getUsersHandler);
 
 export default router;
