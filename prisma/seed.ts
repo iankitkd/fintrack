@@ -10,8 +10,10 @@ const pool = new Pool({ connectionString });
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
+const SALT_ROUNDS = 10;
+
 async function main() {
-  const password = await bcrypt.hash("admin123", 10);
+  const password = await bcrypt.hash("admin123", SALT_ROUNDS);
 
   await prisma.user.create({
     data: {
