@@ -18,6 +18,7 @@ model User {
   password  String
   role      Role
   status    Status   @default(ACTIVE)
+  record    Record[]
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
 }
@@ -31,4 +32,22 @@ enum Role {
 enum Status {
   ACTIVE
   INACTIVE
+}
+
+model Record {
+  id        String     @id @default(uuid())
+  amount    Float
+  type      RecordType
+  category  String
+  date      DateTime
+  note      String?
+  userId    String
+  createdAt DateTime   @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+enum RecordType {
+  INCOME
+  EXPENSE
 }

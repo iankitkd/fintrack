@@ -5,7 +5,8 @@ import { ZodError, type ZodType } from "zod";
 export const validate = (schema: ZodType) => {
   return (req: Request, res: Response, next: NextFunction) => {
     try {
-      schema.parse(req.body);
+      const parsed = schema.parse(req.body);
+      req.body = parsed;
       next();
     } catch (err: unknown) {
       if (err instanceof ZodError) {

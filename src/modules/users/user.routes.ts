@@ -5,7 +5,7 @@ import {
   createUserHandler,
   getUsersHandler,
 } from "#/modules/users/user.controller.js";
-import { userSchema } from "#/modules/users/user.validation.js";
+import { createUserSchema } from "#/modules/users/user.validation.js";
 import { Router } from "express";
 
 const router = Router();
@@ -14,7 +14,7 @@ router.post(
   "/",
   authenticate,
   authorize("ADMIN"),
-  validate(userSchema),
+  validate(createUserSchema),
   createUserHandler,
 );
 router.get("/", authenticate, authorize("ADMIN"), getUsersHandler);
