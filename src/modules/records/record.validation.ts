@@ -1,3 +1,4 @@
+import { registry } from "#/config/openapi.js";
 import { RecordType } from "#/generated/prisma/enums.js";
 import { z } from "zod";
 
@@ -10,3 +11,8 @@ export const createRecordSchema = z.object({
 });
 
 export type CreateRecordInput = z.infer<typeof createRecordSchema>;
+
+export const CreateRecordRef = registry.register(
+  "CreateRecord",
+  createRecordSchema,
+);

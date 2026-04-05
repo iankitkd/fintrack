@@ -11,11 +11,10 @@ import { Router } from "express";
 const router = Router();
 
 router.use(authenticate);
-router.use(authorize("dashboard:read"));
 
-router.get("/summary", summaryHandler);
-router.get("/categories", categoryHandler);
-router.get("/recent", recentHandler);
-router.get("/trends", trendsHandler);
+router.get("/summary", authorize("dashboard:read"), summaryHandler);
+router.get("/categories", authorize("dashboard:read"), categoryHandler);
+router.get("/recent", authorize("dashboard:read"), recentHandler);
+router.get("/trends", authorize("dashboard:read"), trendsHandler);
 
 export default router;

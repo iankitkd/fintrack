@@ -1,3 +1,4 @@
+import { registry } from "#/config/openapi.js";
 import { Role } from "#/generated/prisma/enums.js";
 import { z } from "zod";
 
@@ -6,3 +7,5 @@ export const createUserSchema = z.object({
   password: z.string().min(6, "Password must be of atleast 6 characters"),
   role: z.enum(Role, "Invalid role"),
 });
+
+export const CreateUserRef = registry.register("CreateUser", createUserSchema);
