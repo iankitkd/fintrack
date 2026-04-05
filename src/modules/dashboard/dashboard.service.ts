@@ -1,5 +1,8 @@
 import { prisma } from "#/db/prisma.js";
-import type { Summary } from "#/modules/dashboard/dashboard.types.js";
+import type {
+  MonthlyTrend,
+  Summary,
+} from "#/modules/dashboard/dashboard.types.js";
 
 export const getSummary = async (userId: string): Promise<Summary> => {
   const income = await prisma.record.aggregate({
@@ -44,29 +47,39 @@ export const getRecentTransactions = async (userId: string, take = 5) => {
   });
 };
 
-export const getMonthlyTrends = async (userId: string) => {
+export const getMonthlyTrends = async (
+  userId: string,
+): Promise<MonthlyTrend[]> => {
   const records = await prisma.record.findMany({
     where: { userId },
     select: { amount: true, type: true, date: true },
+    orderBy: { date: "asc" },
   });
 
-  const result: any = {};
+  const map: Record<string, MonthlyTrend> = {};
 
-  records.forEach((r) => {
-    const month = new Date(r.date).toISOString().slice(0, 7);
+  for (const r of records) {
+    const month = r.date.toISOString().slice(0, 7);
 
-    if (!result[month]) {
-      result[month] = { income: 0, expense: 0, balance: 0 };
+    if (!map[month]) {
+      map[month] = {
+        month,
+        income: 0,
+        expense: 0,
+        balance: 0,
+      };
     }
+
+    const current = map[month];
 
     if (r.type === "INCOME") {
-      result[month].income += r.amount;
-      result[month].balance += r.amount;
+      current.income += r.amount;
+      current.balance += r.amount;
     } else {
-      result[month].expense += r.amount;
-      result[month].balance += r.amount;
+      current.expense += r.amount;
+      current.balance -= r.amount;
     }
-  });
+  }
 
-  return result;
+  return Object.values(map);
 };
