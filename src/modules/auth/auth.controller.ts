@@ -1,5 +1,6 @@
-import { HTTP_STATUS } from "#/constants/httpStatus.js";
 import { getMe, login } from "#/modules/auth/auth.service.js";
+import type { AuthRequest } from "#/types/express.js";
+import { asyncHandler } from "#/utils/asyncHandler.js";
 import type { Request, Response } from "express";
 
 const COOKIE_OPTIONS = {
@@ -9,46 +10,28 @@ const COOKIE_OPTIONS = {
   maxAge: 24 * 60 * 60 * 1000,
 };
 
-export const loginHandler = async (req: Request, res: Response) => {
-  try {
+export const loginHandler = asyncHandler(
+  async (req: Request, res: Response) => {
     const { email, password } = req.body;
-
-    if (!email || !password) {
-      return res
-        .status(HTTP_STATUS.BAD_REQUEST)
-        .json({ message: "Required field missing" });
-    }
 
     const result = await login(email, password);
 
     res.cookie("token", result.token, COOKIE_OPTIONS);
-
     res.json({ message: "Login successful" });
-  } catch (error: unknown) {
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
-      message: error instanceof Error ? error.message : "Something went wrong",
-    });
-  }
-};
+  },
+);
 
-export const getMeHandler = async (req: Request, res: Response) => {
-  try {
-    const userId = req.user?.id;
-    if (!userId) {
-      return res
-        .status(HTTP_STATUS.UNAUTHORIZED)
-        .json({ message: "Unauthorized" });
-    }
+export const getMeHandler = asyncHandler(
+  async (req: AuthRequest, res: Response) => {
+    const userId = req.user.id;
     const user = await getMe(userId);
     res.json(user);
-  } catch (error: unknown) {
-    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
-      message: error instanceof Error ? error.message : "Something went wrong",
-    });
-  }
-};
+  },
+);
 
-export const logoutHandler = async (_req: Request, res: Response) => {
-  res.clearCookie("token");
-  res.json({ message: "Logged out successfully" });
-};
+export const logoutHandler = asyncHandler(
+  async (_req: AuthRequest, res: Response) => {
+    res.clearCookie("token");
+    res.json({ message: "Logged out successfully" });
+  },
+);
