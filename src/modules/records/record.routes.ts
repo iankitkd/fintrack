@@ -1,5 +1,6 @@
 import { validate } from "#/middleware/validate.js";
 import { authenticate } from "#/modules/auth/auth.middleware.js";
+import { authorize } from "#/modules/auth/role.middleware.js";
 import {
   createRecordHandler,
   deleteRecordHandler,
@@ -13,9 +14,14 @@ const router = Router();
 
 router.use(authenticate);
 
-router.post("/", validate(createRecordSchema), createRecordHandler);
-router.get("/", getRecordsHandler);
-router.patch("/:id", updateRecordHandler);
-router.delete("/:id", deleteRecordHandler);
+router.post(
+  "/",
+  authorize("records:create"),
+  validate(createRecordSchema),
+  createRecordHandler,
+);
+router.get("/", authorize("records:read"), getRecordsHandler);
+router.patch("/:id", authorize("records:update"), updateRecordHandler);
+router.delete("/:id", authorize("records:delete"), deleteRecordHandler);
 
 export default router;

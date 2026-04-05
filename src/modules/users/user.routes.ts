@@ -10,13 +10,10 @@ import { Router } from "express";
 
 const router = Router();
 
-router.post(
-  "/",
-  authenticate,
-  authorize("ADMIN"),
-  validate(createUserSchema),
-  createUserHandler,
-);
-router.get("/", authenticate, authorize("ADMIN"), getUsersHandler);
+router.use(authenticate);
+router.use(authorize("users:manage"));
+
+router.post("/", validate(createUserSchema), createUserHandler);
+router.get("/", getUsersHandler);
 
 export default router;

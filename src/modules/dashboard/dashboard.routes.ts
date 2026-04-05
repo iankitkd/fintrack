@@ -1,4 +1,5 @@
 import { authenticate } from "#/modules/auth/auth.middleware.js";
+import { authorize } from "#/modules/auth/role.middleware.js";
 import {
   categoryHandler,
   recentHandler,
@@ -10,6 +11,7 @@ import { Router } from "express";
 const router = Router();
 
 router.use(authenticate);
+router.use(authorize("dashboard:read"));
 
 router.get("/summary", summaryHandler);
 router.get("/categories", categoryHandler);
