@@ -29,6 +29,28 @@ registry.registerPath({
   path: "/records",
   tags: ["Records"],
   security: [{ bearerAuth: [] }],
+  parameters: [
+    {
+      name: "type",
+      in: "query",
+      schema: { type: "string", example: "EXPENSE" },
+    },
+    {
+      name: "category",
+      in: "query",
+      schema: { type: "string", example: "travel" },
+    },
+    {
+      name: "startDate",
+      in: "query",
+      schema: { type: "string", format: "date", example: "2026-01-01" },
+    },
+    {
+      name: "endDate",
+      in: "query",
+      schema: { type: "string", format: "date", example: "2026-04-06" },
+    },
+  ],
   responses: {
     201: { description: "List of records" },
     401: { description: "Unauthorized" },
