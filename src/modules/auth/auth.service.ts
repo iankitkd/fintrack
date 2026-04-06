@@ -1,12 +1,12 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { findUserByEmail, findUserById } from "#/modules/users/user.service.js";
-import { config } from "#/config/index.js";
-import { AppError } from "#/utils/AppError.js";
-import { HTTP_STATUS } from "#/constants/httpStatus.js";
+import { config } from "../../config/index.js";
+import { findUserByEmail, findUserById } from "../users/user.service.js";
+import { AppError } from "../../utils/AppError.js";
+import { HTTP_STATUS } from "../../constants/httpStatus.js";
 
 const generateToken = (user: { id: string; role: string }) => {
-  return jwt.sign(user, config.jwtSecret, { expiresIn: "1d" });
+  return jwt.sign(user, config.JWT_SECRET, { expiresIn: "1d" });
 };
 
 export const login = async (email: string, password: string) => {

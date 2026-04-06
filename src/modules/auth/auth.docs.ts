@@ -1,4 +1,4 @@
-import { registry } from "#/config/openapi.js";
+import { registry } from "../../config/openapi.js";
 import { LoginRef } from "./auth.validation.js";
 
 registry.registerPath({

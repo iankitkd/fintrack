@@ -6,13 +6,10 @@
   "author": "",
   "type": "module",
   "main": "dist/server.js",
-  "imports": {
-    "#/*": "./src/*"
-  },
   "scripts": {
     "dev": "tsx --watch --env-file=.env src/server.ts",
     "build": "tsc",
-    "start": "node --env-file=.env dist/server.js",
+    "start": "node dist/server.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:seed": "prisma db seed",

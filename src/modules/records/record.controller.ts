@@ -1,11 +1,11 @@
 import type { Request, Response } from "express";
 import {
   createRecord,
+  deleteRecord,
   getRecords,
   updateRecord,
-  deleteRecord,
-} from "#/modules/records/record.service.js";
-import { HTTP_STATUS } from "#/constants/httpStatus.js";
+} from "./record.service.js";
+import { HTTP_STATUS } from "../../constants/httpStatus.js";
 
 export const createRecordHandler = async (req: Request, res: Response) => {
   const record = await createRecord(req.user!.id, req.body);

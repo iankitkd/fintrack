@@ -1,6 +1,6 @@
-import { registry } from "#/config/openapi.js";
-import { Role } from "#/generated/prisma/enums.js";
 import { z } from "zod";
+import { Role } from "../../generated/prisma/enums.js";
+import { registry } from "../../config/openapi.js";
 
 export const createUserSchema = z.object({
   email: z.email("Email is required"),

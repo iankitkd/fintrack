@@ -1,5 +1,5 @@
-import { registry } from "#/config/openapi.js";
 import { z } from "zod";
+import { registry } from "../../config/openapi.js";
 
 export const loginSchema = z.object({
   email: z.email("Email is required"),

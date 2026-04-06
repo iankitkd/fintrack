@@ -1,8 +1,5 @@
-import { prisma } from "#/db/prisma.js";
-import type {
-  MonthlyTrend,
-  Summary,
-} from "#/modules/dashboard/dashboard.types.js";
+import { prisma } from "../../db/prisma.js";
+import type { MonthlyTrend, Summary } from "./dashboard.types.js";
 
 export const getSummary = async (userId: string): Promise<Summary> => {
   const income = await prisma.record.aggregate({

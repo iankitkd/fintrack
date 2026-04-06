@@ -1,6 +1,6 @@
-import { HTTP_STATUS } from "#/constants/httpStatus.js";
-import { AppError } from "#/utils/AppError.js";
 import type { Request, Response, NextFunction } from "express";
+import { AppError } from "../utils/AppError.js";
+import { HTTP_STATUS } from "../constants/httpStatus.js";
 
 export const errorHandler = (
   err: unknown,

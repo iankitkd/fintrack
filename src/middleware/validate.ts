@@ -1,6 +1,6 @@
-import { HTTP_STATUS } from "#/constants/httpStatus.js";
 import type { Request, Response, NextFunction } from "express";
 import { ZodError, type ZodType } from "zod";
+import { HTTP_STATUS } from "../constants/httpStatus.js";
 
 export const validate = (schema: ZodType) => {
   return (req: Request, res: Response, next: NextFunction) => {

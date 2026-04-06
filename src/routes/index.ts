@@ -1,8 +1,8 @@
 import { Router } from "express";
-import authRoutes from "#/modules/auth/auth.routes.js";
-import userRoutes from "#/modules/users/user.routes.js";
-import recordRoutes from "#/modules/records/record.routes.js";
-import dashboardRoutes from "#/modules/dashboard/dashboard.routes.js";
+import authRoutes from "../modules/auth/auth.routes.js";
+import userRoutes from "../modules/users/user.routes.js";
+import recordRoutes from "../modules/records/record.routes.js";
+import dashboardRoutes from "../modules/dashboard/dashboard.routes.js";
 
 const router = Router();
 

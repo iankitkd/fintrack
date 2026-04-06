@@ -1,10 +1,10 @@
 import express from "express";
 import cors from "cors";
-import routes from "#/routes/index.js";
+import routes from "./routes/index.js";
 import cookieParser from "cookie-parser";
-import { errorHandler } from "#/middleware/error.js";
+import { errorHandler } from "./middleware/error.js";
 import swaggerUi from "swagger-ui-express";
-import { swaggerSpec } from "#/config/swagger.js";
+import { swaggerSpec } from "./config/swagger.js";
 
 const app = express();
 

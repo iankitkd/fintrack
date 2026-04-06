@@ -1,6 +1,6 @@
-import { prisma } from "#/db/prisma.js";
-import type { RecordFilter } from "#/modules/records/record.types.js";
-import type { CreateRecordInput } from "#/modules/records/record.validation.js";
+import { prisma } from "../../db/prisma.js";
+import type { RecordFilter } from "./record.types.js";
+import type { CreateRecordInput } from "./record.validation.js";
 
 export const createRecord = (userId: string, data: CreateRecordInput) => {
   return prisma.record.create({

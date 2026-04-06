@@ -1,8 +1,8 @@
-import { config } from "#/config/index.js";
-import { HTTP_STATUS } from "#/constants/httpStatus.js";
-import type { Role } from "#/generated/prisma/enums.js";
 import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import { HTTP_STATUS } from "../../constants/httpStatus.js";
+import { config } from "../../config/index.js";
+import type { Role } from "../../generated/prisma/enums.js";
 
 export const authenticate = (
   req: Request,
@@ -25,7 +25,7 @@ export const authenticate = (
     return res.status(HTTP_STATUS.UNAUTHORIZED).json({ message: "No token" });
 
   try {
-    const decoded = jwt.verify(token, config.jwtSecret) as {
+    const decoded = jwt.verify(token, config.JWT_SECRET) as {
       id: string;
       role: Role;
     };

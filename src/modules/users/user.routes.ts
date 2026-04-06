@@ -1,12 +1,9 @@
-import { validate } from "#/middleware/validate.js";
-import { authenticate } from "#/modules/auth/auth.middleware.js";
-import { authorize } from "#/modules/auth/role.middleware.js";
-import {
-  createUserHandler,
-  getUsersHandler,
-} from "#/modules/users/user.controller.js";
-import { createUserSchema } from "#/modules/users/user.validation.js";
 import { Router } from "express";
+import { authenticate } from "../auth/auth.middleware.js";
+import { authorize } from "../auth/role.middleware.js";
+import { validate } from "../../middleware/validate.js";
+import { createUserSchema } from "./user.validation.js";
+import { createUserHandler, getUsersHandler } from "./user.controller.js";
 
 const router = Router();
 

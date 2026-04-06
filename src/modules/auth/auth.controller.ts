@@ -1,11 +1,12 @@
-import { getMe, login } from "#/modules/auth/auth.service.js";
-import type { AuthRequest } from "#/types/express.js";
-import { asyncHandler } from "#/utils/asyncHandler.js";
+import { config } from "../../config/index.js";
+import type { AuthRequest } from "../../types/express.js";
+import { asyncHandler } from "../../utils/asyncHandler.js";
+import { getMe, login } from "../auth/auth.service.js";
 import type { Request, Response } from "express";
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
+  secure: config.NODE_ENV === "production",
   sameSite: "lax" as const,
   maxAge: 24 * 60 * 60 * 1000,
 };

@@ -1,14 +1,14 @@
-import { validate } from "#/middleware/validate.js";
-import { authenticate } from "#/modules/auth/auth.middleware.js";
-import { authorize } from "#/modules/auth/role.middleware.js";
+import { Router } from "express";
+import { authenticate } from "../auth/auth.middleware.js";
+import { authorize } from "../auth/role.middleware.js";
+import { validate } from "../../middleware/validate.js";
+import { createRecordSchema } from "./record.validation.js";
 import {
   createRecordHandler,
   deleteRecordHandler,
   getRecordsHandler,
   updateRecordHandler,
-} from "#/modules/records/record.controller.js";
-import { createRecordSchema } from "#/modules/records/record.validation.js";
-import { Router } from "express";
+} from "./record.controller.js";
 
 const router = Router();
 

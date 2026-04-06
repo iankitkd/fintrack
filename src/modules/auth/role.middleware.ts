@@ -1,9 +1,6 @@
-import { HTTP_STATUS } from "#/constants/httpStatus.js";
-import {
-  ROLE_PERMISSIONS,
-  type Permission,
-} from "#/modules/auth/permission.js";
 import type { Request, Response, NextFunction } from "express";
+import { ROLE_PERMISSIONS, type Permission } from "./permission.js";
+import { HTTP_STATUS } from "../../constants/httpStatus.js";
 
 export const authorize = (...required: Permission[]) => {
   return (req: Request, res: Response, next: NextFunction) => {

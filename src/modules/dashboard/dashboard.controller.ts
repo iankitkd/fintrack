@@ -1,10 +1,10 @@
 import type { Request, Response } from "express";
 import {
-  getSummary,
   getCategoryBreakdown,
-  getRecentTransactions,
   getMonthlyTrends,
-} from "#/modules/dashboard/dashboard.service.js";
+  getRecentTransactions,
+  getSummary,
+} from "./dashboard.service.js";
 
 export const summaryHandler = async (req: Request, res: Response) => {
   const data = await getSummary(req.user!.id);

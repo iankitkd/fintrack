@@ -1,12 +1,12 @@
-import { validate } from "#/middleware/validate.js";
+import { Router } from "express";
+import { validate } from "../../middleware/validate.js";
+import { authenticate } from "./auth.middleware.js";
+import { loginSchema } from "./auth.validation.js";
 import {
   getMeHandler,
   loginHandler,
   logoutHandler,
-} from "#/modules/auth/auth.controller.js";
-import { authenticate } from "#/modules/auth/auth.middleware.js";
-import { loginSchema } from "#/modules/auth/auth.validation.js";
-import { Router } from "express";
+} from "./auth.controller.js";
 
 const router = Router();
 

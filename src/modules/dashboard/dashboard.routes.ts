@@ -1,12 +1,12 @@
-import { authenticate } from "#/modules/auth/auth.middleware.js";
-import { authorize } from "#/modules/auth/role.middleware.js";
+import { Router } from "express";
+import { authenticate } from "../auth/auth.middleware.js";
+import { authorize } from "../auth/role.middleware.js";
 import {
   categoryHandler,
   recentHandler,
   summaryHandler,
   trendsHandler,
-} from "#/modules/dashboard/dashboard.controller.js";
-import { Router } from "express";
+} from "./dashboard.controller.js";
 
 const router = Router();
 

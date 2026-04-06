@@ -1,8 +1,8 @@
-import { HTTP_STATUS } from "#/constants/httpStatus.js";
-import { prisma } from "#/db/prisma.js";
-import type { Role } from "#/generated/prisma/enums.js";
-import { AppError } from "#/utils/AppError.js";
 import bcrypt from "bcrypt";
+import type { Role } from "../../generated/prisma/enums.js";
+import { AppError } from "../../utils/AppError.js";
+import { HTTP_STATUS } from "../../constants/httpStatus.js";
+import { prisma } from "../../db/prisma.js";
 
 const SALT_ROUNDS = 10;
 

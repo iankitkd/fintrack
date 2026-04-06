@@ -1,7 +1,7 @@
-import { HTTP_STATUS } from "#/constants/httpStatus.js";
-import { createUser, getUsers } from "#/modules/users/user.service.js";
-import { asyncHandler } from "#/utils/asyncHandler.js";
 import type { Request, Response } from "express";
+import { asyncHandler } from "../../utils/asyncHandler.js";
+import { createUser, getUsers } from "./user.service.js";
+import { HTTP_STATUS } from "../../constants/httpStatus.js";
 
 export const createUserHandler = asyncHandler(
   async (req: Request, res: Response) => {
